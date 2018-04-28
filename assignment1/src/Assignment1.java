@@ -8,7 +8,7 @@ public class Assignment1 {
 		{
 			if(i % 5 == 0 && i % 3 == 0){
 				
-				System.out.println("BuzzFizz");
+				System.out.println("FizzBuzz");
 				continue;
 			}	
 			if(i % 5 == 0)
