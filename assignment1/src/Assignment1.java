@@ -11,7 +11,7 @@ public class Assignment1 {
 			else if(i % 5 == 0)
 				System.out.println("Buzz");
 			else
-				System.out.prinln(i);
+				System.out.println(i);
 		}
 /*===========================================================================*/
 	}
