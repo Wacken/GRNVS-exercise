@@ -6,11 +6,11 @@ public class Assignment1 {
 /*====================================TODO===================================*/
 		for(int i = 1; i <= max; i++)
 		{
+			if(i % 5 == 0)
+				System.out.println("Buzz");
 			if(i % 3 == 0)
 				System.out.println("Fizz");
-			else if(i % 5 == 0)
-				System.out.println("Buzz");
-			else
+			if(i % 5 != 0 && i % 3 != 0)
 				System.out.println(i);
 		}
 /*===========================================================================*/
