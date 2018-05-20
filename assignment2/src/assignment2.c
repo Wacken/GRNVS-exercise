@@ -36,18 +36,18 @@ void assignment2(int fd, int frames)
 	 */
 
 	memcpy(&mymac, grnvs_get_hwaddr(fd), ETH_ALEN);
-	size_t etherType0800Frames;
-	size_t etherType0806Frames;
-	size_t etherType86ddFrames;
-	size_t etherType0000Frames;
-	size_t etherTypeffffBytes;
-	size_t etherType0800Bytes;
-	size_t etherType0806Bytes;
-	size_t etherType86ddBytes;
-	size_t etherType0000Bytes;
-	size_t etherTypeffffBytes; 
-	size_t multicast;
-	size_t notMulticast;
+	int etherType0800Frames = 0;
+	int etherType0806Frames = 0;
+	int etherType86ddFrames = 0;
+	int etherType0000Frames = 0;
+	int etherTypeffffBytes = 0;
+	int etherType0800Bytes = 0;
+	int etherType0806Bytes = 0;
+	int etherType86ddBytes = 0;
+	int etherType0000Bytes = 0;
+	int etherTypeffffBytes = 0; 
+	int multicast = 0;
+	int notMulticast = 0;
 /*===========================================================================*/
 
 	/* This is the ready marker! do not remove! */
