@@ -40,7 +40,7 @@ void assignment2(int fd, int frames)
 	int etherType0806Frames = 0;
 	int etherType86ddFrames = 0;
 	int etherType0000Frames = 0;
-	int etherTypeffffBytes = 0;
+	int etherTypeffffFrames = 0;
 	int etherType0800Bytes = 0;
 	int etherType0806Bytes = 0;
 	int etherType86ddBytes = 0;
