@@ -55,7 +55,7 @@ void assignment2(int fd, int frames)
 
 /*====================================TODO===================================*/
 	/* Update the loop condition */
-	while(1) {
+	while(frames-- > 0) {
 /*===========================================================================*/
 		ret = grnvs_read(fd, recbuffer, sizeof(recbuffer), &timeout);
 		if (ret == 0) {
