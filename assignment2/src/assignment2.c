@@ -97,11 +97,11 @@ void assignment2(int fd, int frames)
 		}
 		if(recbuffer[0] > 127){
 
-			multicast++;
+			notMulticast++;
 		}
 		else{
 
-			notMulticast++;
+			multicast++;
 		}
 /*===========================================================================*/
 	}
@@ -131,7 +131,7 @@ void assignment2(int fd, int frames)
 	printf("%d of them were for me\n", notMulticast);
 	printf("%d of them were multicast\n", multicast);
 	int allBytes = etherType0000Bytes + etherType0800Bytes + etherType0806Bytes + etherType86ddBytes + etherTypeffffBytes;
-	printf("IPv4 accounted for %f%% and IPv6 for %f%% of traffic\n", 100.0 * allBytes/etherType0800Bytes, 100.0 * allBytes/etherType0806Bytes);
+	printf("IPv4 accounted for %f%% and IPv6 for %f%% of traffic\n", allBytes/etherType0800Bytes, allBytes/etherType0806Bytes);
 /*===========================================================================*/
 }
 
