@@ -97,11 +97,11 @@ void assignment2(int fd, int frames)
 		}
 		if(recbuffer[0] > 127){
 
-			multicast++;
+			notMulticast++;
 		}
 		else{
 
-			notMulticast++;
+			multicast++;
 		}
 /*===========================================================================*/
 	}
