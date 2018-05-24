@@ -46,7 +46,14 @@ public class Assignment2 {
 	 * should be done here.
 	 */
 			int[] addTo = allEtherTypes.get(new int[]{recbuffer[12],recbuffer[13]});
-			allEtherTypes.put(new int[]{recbuffer[12],recbuffer[13]},new int[]{addTo[0] + 1,addTo[1] + 1});
+			if(addTo != null)
+			{
+				allEtherTypes.put(new int[]{recbuffer[12],recbuffer[13]},new int[]{addTo[0] + 1,addTo[1] + 1});
+			}
+			else
+			{
+				allEtherTypes.put(new int[]{recbuffer[12],recbuffer[13]},new int[]{1, 1});
+			}
 			if(recbuffer[0] > 127){
 
 				notMulticast++;
@@ -59,6 +66,15 @@ public class Assignment2 {
 		}
 /*====================================TODO===================================*/
 	/* Print your summary here */
+		if (allEtherTypes.get(new int[]{8,0}) == null) {
+			allEtherTypes.put(new int[]{8,0},new int[]{0,0});
+		}
+		if (allEtherTypes.get(new int[]{8,6}) == null) {
+			allEtherTypes.put(new int[]{8,6},new int[]{0,0});
+		}
+		if (allEtherTypes.get(new int[]{134,221}) == null) {
+			allEtherTypes.put(new int[]{134,221},new int[]{0,0});
+		}
 		if(allEtherTypes.get(new int[]{8,0})[0] > 0){
 
 			System.out.printf("0x0800: %d frames, %d bytes\n", allEtherTypes.get(new int[]{8,0})[0], allEtherTypes.get(new int[]{8,0})[1]);
