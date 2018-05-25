@@ -68,12 +68,15 @@ public class Assignment2 {
 	/* Print your summary here */
 		if (allEtherTypes.get(new int[]{8,0}) == null) {
 			allEtherTypes.put(new int[]{8,0},new int[]{0,0});
+			System.out.printf("Content: %d",allEtherTypes.get(new int[]{8,0})[0]);
 		}
 		if (allEtherTypes.get(new int[]{8,6}) == null) {
 			allEtherTypes.put(new int[]{8,6},new int[]{0,0});
+			System.out.printf("Content: %d",allEtherTypes.get(new int[]{8,6})[0]);
 		}
 		if (allEtherTypes.get(new int[]{134,221}) == null) {
 			allEtherTypes.put(new int[]{134,221},new int[]{0,0});
+			System.out.printf("Content: %d",allEtherTypes.get(new int[]{134,221})[0]);
 		}
 		if(allEtherTypes.get(new int[]{8,0})[0] > 0){
 
