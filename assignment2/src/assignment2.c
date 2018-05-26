@@ -81,6 +81,10 @@ void assignment2(int fd, int frames)
 
 /*====================================TODO===================================*/
 	/* Print your summary here */
+	if(allEtherFrames[0] > 0)
+	{
+		printf("0x0000: %d frames, %d bytes\n", allEtherFrames[0], allEtherBytes[0]);
+	}
 	if(allEtherFrames[2048] > 0)
 	{
 		printf("0x0800: %d frames, %d bytes\n", allEtherFrames[2048], allEtherBytes[2048]);
@@ -92,6 +96,10 @@ void assignment2(int fd, int frames)
 	if(allEtherFrames[34525] > 0){
 
 		printf("0x86dd: %d frames, %d bytes\n", allEtherFrames[34525], allEtherBytes[34525]);
+	}
+	if(allEtherFrames[65535] > 0)
+	{
+		printf("0xffff: %d frames, %d bytes\n", allEtherFrames[65535], allEtherBytes[65535]);
 	}
 	printf("%d of them were for me\n", notMulticast);
 	printf("%d of them were multicast\n", multicast);
