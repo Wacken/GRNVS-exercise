@@ -36,16 +36,6 @@ void assignment2(int fd, int frames)
 	 */
 
 	memcpy(&mymac, grnvs_get_hwaddr(fd), ETH_ALEN);
-	int etherType0800Frames = 0;
-	int etherType0806Frames = 0;
-	int etherType86ddFrames = 0;
-	int etherType0000Frames = 0;
-	int etherTypeffffFrames = 0;
-	int etherType0800Bytes = 0;
-	int etherType0806Bytes = 0;
-	int etherType86ddBytes = 0;
-	int etherType0000Bytes = 0;
-	int etherTypeffffBytes = 0; 
 	int allEtherBytes[65535];
 	int allEtherFrames[65535];
 	
@@ -78,36 +68,11 @@ void assignment2(int fd, int frames)
 		allEtherBytes[index] += ret;
 		allEtherFrames[index]++;
 		allBytes += ret;
-		// if(etherTypeF == 8 && etherTypeB == 0){
-
-		// 	etherType0800Bytes += ret;
-		// 	etherType0800Frames++;
-		// }
-		// if(etherTypeF == 8 && etherTypeB == 6){
-
-		// 	etherType0806Bytes += ret;
-		// 	etherType0806Frames++;
-		// }
-		// if(etherTypeF == 134 && etherTypeB == 221){
-
-		// 	etherType86ddBytes += ret;
-		// 	etherType86ddFrames++;
-		// }
-		// if(etherTypeF == 0 && etherTypeB == 0){
-
-		// 	etherType0000Bytes += ret;
-		// 	etherType0000Frames++;
-		// }
-		// if(etherTypeF == 255 && etherTypeB == 255){
-
-		// 	etherTypeffffBytes += ret;
-		// 	etherTypeffffFrames++;
-		// }
-		if(recbuffer[0] > 127)
+		if(recbuffer[0] & (1<<7) == 0)//recbuffer[0] & 1000 0000
 		{
 			notMulticast++;
 		}
-		else
+		else 
 		{
 			multicast++;
 		}
@@ -116,18 +81,6 @@ void assignment2(int fd, int frames)
 
 /*====================================TODO===================================*/
 	/* Print your summary here */
-	// if(etherType0800Frames > 0){
-
-	// 	printf("0x0800: %d frames, %d bytes\n", etherType0800Frames, etherType0800Bytes);
-	// }
-	// if(etherType0806Frames > 0){
-
-	// 	printf("0x0806: %d frames, %d bytes\n", etherType0806Frames, etherType0806Bytes);
-	// }
-	// if(etherType86ddFrames > 0){
-
-	// 	printf("0x86dd: %d frames, %d bytes\n", etherType86ddFrames, etherType86ddBytes);
-	// }
 	if(allEtherFrames[2048] > 0)
 	{
 		printf("0x0800: %d frames, %d bytes\n", allEtherFrames[2048], allEtherBytes[2048]);
@@ -140,14 +93,6 @@ void assignment2(int fd, int frames)
 
 		printf("0x86dd: %d frames, %d bytes\n", allEtherFrames[34525], allEtherBytes[34525]);
 	}
-	// if(etherType0000Frames > 0){
-
-	// 	printf("0x0000: %d frames, %d bytes\n", etherType0000Frames, etherType0000Bytes);
-	// }
-	// if(etherTypeffffFrames > 0){
-
-	// 	printf("0xffff: %d frames, %d bytes\n", etherTypeffffFrames, etherTypeffffBytes);
-	// }
 	printf("%d of them were for me\n", notMulticast);
 	printf("%d of them were multicast\n", multicast);
 	if(allBytes > 0)
