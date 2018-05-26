@@ -36,8 +36,8 @@ void assignment2(int fd, int frames)
 	 */
 
 	memcpy(&mymac, grnvs_get_hwaddr(fd), ETH_ALEN);
-	int allEtherBytes[65535];
-	int allEtherFrames[65535];
+	int allEtherBytes[65536];
+	int allEtherFrames[65536];
 	
 	int multicast = 0;
 	int notMulticast = 0;
