@@ -78,38 +78,38 @@ void assignment2(int fd, int frames)
 		allEtherBytes[index] += ret;
 		allEtherFrames[index]++;
 		allBytes += ret;
-		if(etherTypeF == 8 && etherTypeB == 0){
+		// if(etherTypeF == 8 && etherTypeB == 0){
 
-			etherType0800Bytes += ret;
-			etherType0800Frames++;
-		}
-		if(etherTypeF == 8 && etherTypeB == 6){
+		// 	etherType0800Bytes += ret;
+		// 	etherType0800Frames++;
+		// }
+		// if(etherTypeF == 8 && etherTypeB == 6){
 
-			etherType0806Bytes += ret;
-			etherType0806Frames++;
-		}
-		if(etherTypeF == 134 && etherTypeB == 221){
+		// 	etherType0806Bytes += ret;
+		// 	etherType0806Frames++;
+		// }
+		// if(etherTypeF == 134 && etherTypeB == 221){
 
-			etherType86ddBytes += ret;
-			etherType86ddFrames++;
-		}
-		if(etherTypeF == 0 && etherTypeB == 0){
+		// 	etherType86ddBytes += ret;
+		// 	etherType86ddFrames++;
+		// }
+		// if(etherTypeF == 0 && etherTypeB == 0){
 
-			etherType0000Bytes += ret;
-			etherType0000Frames++;
-		}
-		if(etherTypeF == 255 && etherTypeB == 255){
+		// 	etherType0000Bytes += ret;
+		// 	etherType0000Frames++;
+		// }
+		// if(etherTypeF == 255 && etherTypeB == 255){
 
-			etherTypeffffBytes += ret;
-			etherTypeffffFrames++;
-		}
-		if(recbuffer[0] > 127){
-
-			multicast++;
-		}
-		else{
-
+		// 	etherTypeffffBytes += ret;
+		// 	etherTypeffffFrames++;
+		// }
+		if(recbuffer[0] > 127)
+		{
 			notMulticast++;
+		}
+		else
+		{
+			multicast++;
 		}
 /*===========================================================================*/
 	}
