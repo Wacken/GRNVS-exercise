@@ -1,54 +1,36 @@
 TARGET=ethstats
-TARGETJAR=$(TARGET).jar
-CLASSFOLDER = classes
-SOURCEFOLDER = src
-CLASSES = Arguments GRNVS_RAW Timeout Assignment2
-JAVAFILES = $(addprefix src/, $(addsuffix .java, $(CLASSES)))
-
-# LIBRAW/GRNVS_SOCK required stuff
-LIBSOCKET=deps/libGRNVS.so
-LIBRAWDIR=deps/libraw/
+LIBRAWDIR=libraw/
 LIBRAW=$(LIBRAWDIR)libraw.a
 LDFLAGS=$(LIBRAW)
-CFLAGS+=-I$(LIBRAWDIR)include -I/usr/lib/jvm/java-8-openjdk-amd64/include
-CFLAGS+=-I/usr/lib/jvm/java-8-openjdk-amd64/include/linux -Ideps -fPIC
-CFLAGS+=-fdiagnostics-color=auto
+CFLAGS+=-Wall -Wextra -g -fdiagnostics-color=auto -I$(LIBRAWDIR)include
+BUILDDIR=build
+
+OBJECTS=build/arguments.o build/assignment2.o
 
 .PHONY: all clean fresh
 
-all: $(TARGET) $(TARGETJAR) $(LIBSOCKET)
+all: $(TARGET)
 
-$(TARGETJAR): $(CLASSFOLDER)/.empty $(JAVAFILES)
-	javac -encoding UTF-8 -classpath $(SOURCEFOLDER) -d $(CLASSFOLDER) $(JAVAFILES)
-	@jar cfm $(TARGETJAR) deps/manifest.txt -C $(CLASSFOLDER) .
-
-
-#sed replaces CRLF with just LF for windows + java users
-$(TARGET): deps/run
-	cp deps/run $(TARGET)
-	@sed 's/\r$$//' -i $(TARGET)
-	@chmod +x $(TARGET)
-
-.PRECIOUS: $(CLASSFOLDER)/.empty
-$(CLASSFOLDER)/.empty:
-	@mkdir -p $(CLASSFOLDER)
-	@touch $(CLASSFOLDER)/.empty
-
-LIBSOCKETOBJECTS= deps/GRNVS_RAW.o
-
-$(LIBSOCKET): $(LIBSOCKETOBJECTS) $(LIBRAW)
-	$(CC) $(LIBSOCKETOBJECTS) $(LDFLAGS) -shared -o $(LIBSOCKET)
+$(TARGET): $(OBJECTS) $(LIBRAW)
+	$(CC) $(OBJECTS) $(LDFLAGS) -o $(TARGET)
 
 $(LIBRAW):
 	$(MAKE) -C $(LIBRAWDIR)
 
+$(BUILDDIR)/%.o: src/%.c $(BUILDDIR)/.empty
+	$(CC) $(CFLAGS) $< -c -o $@
+
+.PRECIOUS: $(BUILDDIR)/.empty
+
+$(BUILDDIR)/.empty:
+	@mkdir -p $(BUILDDIR)
+	@touch $@
+
 clean:
-	-$(MAKE) -C $(LIBRAWDIR) clean
-	-rm -rf $(CLASSFOLDER)
+	-rm -rf $(OBJECTS)
+	-rm -rf $(BUILDDIR)
 	-rm -f $(TARGET)
-	-rm -f $(LIBSOCKETOBJECTS)
-	-rm -f $(LIBSOCKET)
-	-rm -f $(TARGETJAR)
+	-$(MAKE) -C $(LIBRAWDIR) clean
 
 fresh: clean
 	$(MAKE) all
