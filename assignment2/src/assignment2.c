@@ -46,8 +46,12 @@ void assignment2(int fd, int frames)
 	int etherType86ddBytes = 0;
 	int etherType0000Bytes = 0;
 	int etherTypeffffBytes = 0; 
+	int allEtherBytes[65535];
+	int allEtherFrames[65535];
+	
 	int multicast = 0;
 	int notMulticast = 0;
+	int allBytes = 0;
 /*===========================================================================*/
 
 	/* This is the ready marker! do not remove! */
@@ -70,6 +74,10 @@ void assignment2(int fd, int frames)
 	 */
 		uint8_t etherTypeF = recbuffer[12];
 		uint8_t etherTypeB = recbuffer[13];
+		int index = etherTypeF << 8 | etherTypeB;
+		allEtherBytes[index] += ret;
+		allEtherFrames[index]++;
+		allBytes += ret;
 		if(etherTypeF == 8 && etherTypeB == 0){
 
 			etherType0800Bytes += ret;
@@ -97,42 +105,54 @@ void assignment2(int fd, int frames)
 		}
 		if(recbuffer[0] > 127){
 
-			notMulticast++;
+			multicast++;
 		}
 		else{
 
-			multicast++;
+			notMulticast++;
 		}
 /*===========================================================================*/
 	}
 
 /*====================================TODO===================================*/
 	/* Print your summary here */
-	if(etherType0800Frames > 0){
+	// if(etherType0800Frames > 0){
 
-		printf("0x0800: %d frames, %d bytes\n", etherType0800Frames, etherType0800Bytes);
-	}
-	if(etherType0806Frames > 0){
+	// 	printf("0x0800: %d frames, %d bytes\n", etherType0800Frames, etherType0800Bytes);
+	// }
+	// if(etherType0806Frames > 0){
 
-		printf("0x0806: %d frames, %d bytes\n", etherType0806Frames, etherType0806Bytes);
-	}
-	if(etherType86ddFrames > 0){
+	// 	printf("0x0806: %d frames, %d bytes\n", etherType0806Frames, etherType0806Bytes);
+	// }
+	// if(etherType86ddFrames > 0){
 
-		printf("0x86dd: %d frames, %d bytes\n", etherType86ddFrames, etherType86ddBytes);
+	// 	printf("0x86dd: %d frames, %d bytes\n", etherType86ddFrames, etherType86ddBytes);
+	// }
+	if(allEtherFrames[2048] > 0)
+	{
+		printf("0x0800: %d frames, %d bytes\n", allEtherFrames[2048], allEtherBytes[2048]);
 	}
-	if(etherType0000Frames > 0){
+	if(allEtherFrames[2054] > 0){
 
-		printf("0x0000: %d frames, %d bytes\n", etherType0000Frames, etherType0000Bytes);
+		printf("0x0806: %d frames, %d bytes\n", allEtherFrames[2054], allEtherBytes[2054]);
 	}
-	if(etherTypeffffFrames > 0){
+	if(allEtherFrames[34525] > 0){
 
-		printf("0xffff: %d frames, %d bytes\n", etherTypeffffFrames, etherTypeffffBytes);
+		printf("0x86dd: %d frames, %d bytes\n", allEtherFrames[34525], allEtherBytes[34525]);
 	}
+	// if(etherType0000Frames > 0){
+
+	// 	printf("0x0000: %d frames, %d bytes\n", etherType0000Frames, etherType0000Bytes);
+	// }
+	// if(etherTypeffffFrames > 0){
+
+	// 	printf("0xffff: %d frames, %d bytes\n", etherTypeffffFrames, etherTypeffffBytes);
+	// }
 	printf("%d of them were for me\n", notMulticast);
 	printf("%d of them were multicast\n", multicast);
-	int allBytes = etherType0000Bytes + etherType0800Bytes + etherType0806Bytes + etherType86ddBytes + etherTypeffffBytes;
-	if(allBytes > 0){
-		printf("IPv4 accounted for %f%% and IPv6 for %f%% of traffic\n", 100.0 * etherType0800Bytes/allBytes, 100.0 * etherType86ddBytes/allBytes);
+	if(allBytes > 0)
+	{
+		printf("IPv4 accounted for %f%% and IPv6 for %f%% of traffic\n", 100.0 * allEtherBytes[2048]/allBytes, 100.0 * allEtherBytes[34525]/allBytes);
 	}
 /*===========================================================================*/
 }
