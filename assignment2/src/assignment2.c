@@ -68,7 +68,7 @@ void assignment2(int fd, int frames)
 		allEtherBytes[index] += ret;
 		allEtherFrames[index]++;
 		allBytes += ret;
-		if((recbuffer[0] & (1<<7)) == 1)//recbuffer[0] & 1000 0000
+		if((recbuffer[0] & 1) == 1)//recbuffer[0] & 1000 0000
 		{
 			multicast++;
 		}
