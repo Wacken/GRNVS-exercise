@@ -73,7 +73,7 @@ void assignment2(int fd, int frames)
 		{
 			multicast++;
 		}
-		else if(recbuffer[0] == mymac[0] && recbuffer[1] == mymac[1] && recbuffer[2] == mymac[2] && recbuffer[3] == mymac[3] && recbuffer[4] == mymac[4] && recbuffer[5] == mymac[5]) 
+		else if(recbuffer[6] == mymac[0] && recbuffer[7] == mymac[1] && recbuffer[8] == mymac[2] && recbuffer[9] == mymac[3] && recbuffer[10] == mymac[4] && recbuffer[11] == mymac[5]) 
 		{
 			notMulticast++;
 		}
