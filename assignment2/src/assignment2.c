@@ -105,7 +105,7 @@ void assignment2(int fd, int frames)
 	printf("%d of them were multicast\n", multicast);
 	if(allBytes > 0)
 	{
-		printf("IPv4 accounted for %f%% and IPv6 for %f%% of traffic\n", 100.0 * allEtherBytes[2048]/allBytes, 100.0 * allEtherBytes[34525]/allBytes);
+		printf("IPv4 accounted for %.1f%% and IPv6 for %.1f%% of traffic\n", 100.0 * allEtherBytes[2048]/allBytes, 100.0 * allEtherBytes[34525]/allBytes);
 	}
 /*===========================================================================*/
 }
