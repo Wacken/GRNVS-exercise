@@ -72,7 +72,7 @@ void assignment2(int fd, int frames)
 		{
 			multicast++;
 		}
-		else 
+		else if(recbuffer[0] == recbuffer[1]) 
 		{
 			notMulticast++;
 		}
